@@ -1,0 +1,180 @@
+#include<Windows.h>
+#include<GL\glut.h>
+float width, height;
+void draw();
+void reshape(int, int);
+void background();
+void main(int argc, char** argv)
+
+{
+    //glut init
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+    //end glut init
+    //create window
+    width = GetSystemMetrics(SM_CXSCREEN);//الويدز ياخد عرض الشاشة بتاعتك
+    height = GetSystemMetrics(SM_CYSCREEN);//الطول ياخد طول الشاشة بتاعتك
+    glutInitWindowSize(width, height);
+    glutInitWindowPosition(0, 0);
+    glutCreateWindow("first task");
+    //end create window
+    //call back functions
+    glutDisplayFunc(draw);
+    glutReshapeFunc(reshape);
+
+
+    background();
+
+    glutMainLoop();
+}
+void draw() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+    glPointSize(4.0);
+
+    // Rectangular part of hut
+    glColor3f(0, 1, 0);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(40, 40);
+    glVertex2i(320, 40);
+
+    glVertex2i(40, 200);
+    glVertex2i(320, 200);
+
+    glVertex2i(40, 200);
+    glVertex2i(40, 40);
+
+    glVertex2i(320, 200);
+    glVertex2i(320, 40);
+
+    glEnd();
+
+    // Right Window Update
+    glColor3f(1.0f, 0.0f, 0.0f);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(220, 60);
+    glVertex2i(300, 60);
+
+    glVertex2i(220, 150);
+    glVertex2i(300, 150);
+
+    glVertex2i(220, 60);
+    glVertex2i(220, 150);
+
+    glVertex2i(300, 150);
+    glVertex2i(300, 60);
+
+    glEnd();
+
+    // Right Window Update part 2
+    glColor3f(1.0f, 0.0f, 0.0f);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(220, 170);
+    glVertex2i(300, 170);
+
+    glVertex2i(220, 190);
+    glVertex2i(300, 190);
+
+    glVertex2i(220, 170);
+    glVertex2i(220, 190);
+
+    glVertex2i(300, 190);
+    glVertex2i(300, 170);
+
+    glEnd();
+
+    // Door
+    glColor3f(0.60f, 0.42f, 0.16f);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(130, 40);
+    glVertex2i(130, 160);
+
+    glVertex2i(130, 160);
+    glVertex2i(180, 160);
+
+    glVertex2i(180, 100);
+    glVertex2i(180, 40);
+
+    glVertex2i(120, 40);
+    glVertex2i(170, 40);
+
+    glEnd();
+    glEnable(GL_POINT_SMOOTH);//عشان لما تكبر النقطة تبقي دايرة مش مربع
+    glPointSize(20);
+    glBegin(GL_POINTS);
+    glColor3f(0,0,0);
+    glVertex2f(175, 90);
+
+
+    glEnd();
+
+    // Create Door Part 2
+    glColor3f(0.60f, 0.42f, 0.16f);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(130, 170);
+    glVertex2i(130, 180);
+
+    glVertex2i(130, 180);
+    glVertex2i(180, 180);
+
+    glVertex2i(180, 170);
+    glVertex2i(180, 180);
+
+    glVertex2i(130, 170);
+    glVertex2i(180, 170);
+
+    glEnd();
+
+    // Hut's top triangle part
+    glColor3f(1.0f, 0.0f, 1.0f);
+
+    // Begin the polygon
+    glBegin(GL_POLYGON);
+
+    // Create the polygon
+    glVertex2i(10, 200);
+    glVertex2i(340, 200);
+
+    glVertex2i(200, 390);
+
+    glVertex2i(10, 200);
+    glVertex2i(200, 390);
+
+    glEnd();
+
+    glFlush();
+
+
+}
+void reshape(int w, int h) {
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0, 400.0, 0.0, 400.0);
+    glMatrixMode(GL_MODELVIEW);
+
+}
+//color of background
+void background() {
+    glClearColor(0.5, 0.4, 1, 0);
+}

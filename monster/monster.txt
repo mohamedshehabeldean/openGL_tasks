@@ -1,0 +1,95 @@
+#include<GL\glut.h>
+#include<math.h>
+void draw();
+void reshape(int, int);
+void background();
+void main(int argc, char** argv)
+
+{
+	//glut init
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+	//end glut init
+	//create window
+	glutInitWindowSize(800, 650);
+	glutInitWindowPosition(250, 20);
+	glutCreateWindow("first task");
+	//end create window
+	//call back functions
+	glutDisplayFunc(draw);
+	glutReshapeFunc(reshape);
+
+
+	background();
+
+	glutMainLoop();
+}
+void draw() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	glLineWidth(4);//لو عاوز تعمل سمك للخط
+	float x, y, i;
+	glBegin(GL_TRIANGLES);
+	//color of line
+	glColor3f(1, 0, 0);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(2, 1);
+	glVertex2f(4, 1);
+	glVertex2f(3, 4);
+
+
+	glColor3f(0, 1, 0);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(2, -1);
+	glVertex2f(4, -1);
+	glVertex2f(3, -4);
+
+	glColor3f(0.5, 0.5, 1);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(-2, 1);
+	glVertex2f(-4, 1);
+	glVertex2f(-3, 4);
+
+	glColor3f(0, 0.5, 0.4);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(-2, -1);
+	glVertex2f(-4,-1);
+	glVertex2f(-3, -4);
+
+
+
+	glColor3f(1, 0, 0.4);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(-5, -7);
+	glVertex2f(0, -8);
+	glVertex2f(6, -7);
+
+	glColor3f(1, 1, 1);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(-2, -7.1);
+	glVertex2f(-1.2, -7.1);
+	glVertex2f(-1.6, -7.5);
+
+	glColor3f(1, 1, 1);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	glVertex2f(1, -7.1);
+	glVertex2f(1.8, -7.1);
+	glVertex2f(1.4, -7.5);
+	
+
+
+	
+
+
+
+
+	glEnd();
+	glFlush();
+
+
+}
+void reshape(int w, int h) {
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10, 10, -10, 10);
+	glMatrixMode(GL_MODELVIEW);
+
+}
+//color of background
+void background() {
+	glClearColor(0, 0, 0, 0);
+}

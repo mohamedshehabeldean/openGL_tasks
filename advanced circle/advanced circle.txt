@@ -1,0 +1,157 @@
+#include<math.h>
+#include<Windows.h>//get window size
+#include<GL\glut.h>
+float width, height;
+void draw();
+void reshape(int, int);
+void background();
+void main(int argc, char** argv)
+
+{
+	//glut init
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+	//end glut init
+	//create window
+	width = GetSystemMetrics(SM_CXSCREEN);//الويدز ياخد عرض الشاشة بتاعتك
+	height = GetSystemMetrics(SM_CYSCREEN);//الطول ياخد طول الشاشة بتاعتك
+	glutInitWindowSize(width, height);
+	glutInitWindowPosition(10, 10);
+	glutCreateWindow("first task");
+	//glutFullScreen();//لو عاوز تشيل البورتر الي هو الكلوز والمينيمايز
+	//end create window
+	//call back functions
+	glutDisplayFunc(draw);
+	glutReshapeFunc(reshape);
+
+
+	background();
+
+	glutMainLoop();
+}
+void draw() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLoadIdentity();
+	glLineWidth(2);//لو عاوز تعمل سمك للخط
+	glEnable(GL_LINE_SMOOTH);//عشان لما تكبر النقطة تبقي دايرة مش مربع
+	//glPointSize(70);
+	float x, y, i;
+	glBegin(GL_LINE_LOOP);
+	//color of line
+	glColor3f(1, 0, 0);//عشان تعمل تدرج فالالوان للشكل  تحط لكل نقطتين لون 
+	for (i = 0; i <= 2 * 3.14; i += 0.1) {
+		x = 8 * cos(i);
+		y = 8 * sin(i);
+		glVertex2f(x, y);
+	}
+
+
+
+
+
+
+
+	glEnd();
+	
+
+	glEnable(GL_POINT_SMOOTH);//عشان لما تكبر النقطة تبقي دايرة مش مربع
+	glPointSize(80);
+
+	glBegin(GL_POINTS);
+	glColor3f(0.952, 0.952, 0.952);
+	glVertex2f(4, 4);
+	glVertex2f(-4, 4);
+	//glColor3f(0.38, 0.208, 0.028);
+
+
+
+	glEnd();
+	glEnable(GL_POINT_SMOOTH);//عشان لما تكبر النقطة تبقي دايرة مش مربع
+	glPointSize(45);
+
+	glBegin(GL_POINTS);
+	glColor3f(0.38, 0.208, 0.028);
+	glVertex2f(4, 4);
+	glVertex2f(-4, 4);
+
+
+
+
+	glEnd();
+	glEnable(GL_LINE_SMOOTH);
+	glLineWidth(3);
+	glBegin(GL_LINE_STRIP);
+	glColor3f(0, 1, 0);
+	glVertex2f(0, 2);
+	glVertex2f(0, 0.5);
+	glVertex2f(-1, 0);
+	glVertex2f(0, -1);
+	glVertex2f(0, -2.5);
+
+
+
+
+
+
+	glEnd();
+	glEnable(GL_LINE_SMOOTH);
+	glLineWidth(3);
+	glBegin(GL_POLYGON);
+	glColor3f(0.68, 0.212, 0.444);
+	glVertex2f(4, -4.5);
+	glVertex2f(0, -5);
+	glVertex2f(-4, -4.5);
+	glVertex2f(-4, -4.5);
+	glVertex2f(0, -6);
+	glVertex2f(4, -4.5);
+
+
+
+
+
+	glEnd();
+	/*glEnable(GL_LINE_SMOOTH);
+	glLineWidth(3);
+	glBegin(GL_LINE_STRIP);
+
+	glVertex2f(4, -4.5);
+	glVertex2f(0, -6);
+	glVertex2f(-4, -4.5);
+	glEnd();
+	*/
+	glEnable(GL_LINE_SMOOTH);
+	glLineWidth(3);
+	glBegin(GL_LINES);
+	glColor3f(0, 0, 1);
+	glVertex2f(3, -4);
+	glVertex2f(5, -5);
+	glVertex2f(-3, -4);
+	glVertex2f(-5, -5);
+
+
+	glEnd();
+
+
+	glFlush();
+
+
+}
+void reshape(int w, int h) {
+	float ratio;//عشان تخلي مقياس الرسم بتاعك داينامك مش استاتيك
+	if (h == 0)
+		h = 1;
+	ratio = (float)w / h;
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	if (w >= h)
+		gluOrtho2D(-10 * ratio, 10 * ratio, -10, 10);
+	else
+		gluOrtho2D(-10, 10, -10 / ratio, 10 / ratio);
+	glMatrixMode(GL_MODELVIEW);
+
+}
+//color of background
+void background() {
+	glClearColor(0.5, 0.4, 1, 0);
+}
